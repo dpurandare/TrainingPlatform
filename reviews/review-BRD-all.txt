@@ -1,0 +1,113 @@
+-----------------
+Review of BRD.md
+-----------------
+4.2 Out of scope
+Though the actual video production and the actual graphic design is out of scope, system will create placeholders for integrating with third part system 
+using API. The actual endpoint will be defined after getting the details from the third party endpoint. 
+
+FR-1
+System should provide a view into the requested topics and allow edits to the topics and related information. When the topic information changes, 
+the content workflow should happen again for the update and the version information is kept for each artifact created during workflow. 
+
+FR-2
+System should store the research result properly. 
+There should be facility ingest some content either as supporting material or specific directions or research
+System should take care of the copyright issues and do not use any external contents without taking appropriate care of fair use. 
+
+FR-3
+It will be good idea to version the master content brief. 
+
+General:
+For the entire system only one version of any artifact will be active. 
+Even when multiple versions are available only the latest version will be available for processing. 
+User may view the earlier versions however they will not be used in any processing. 
+Actually FR-7 mentions these points, just verify those for completeness. 
+
+FR-4 
+The training content should mention links for further study or reference materials and standards
+
+FR-5
+The process workflow takes care of the rework to accommodate the changes after the review.
+
+7.1
+Would like to see Data warehouse, cloud specific details, Time series data, model fine-tuning and related data requirements also.
+We should have flexibility add a new track and topics
+
+7.2 
+Need facility to add new tracks 
+
+9.1
+Do you think detailed topic_description will help which can hold a paragraph of general information on topic?
+
+10.2
+Generation -> Review -> Revision may repeat till we get review approval. How do we address this?
+
+11.3
+Administrator, Subject Matter Expert (SME) or any person with the assigned 
+
+12.
+If RBAC can be considered non-functional requirement add it here. 
+
+15.1 
+C-3 and any other new topics as for a new track as well. 
+
+15.2
+A-2 This may be done either manually with facility to accept the generated contents (video, presentation decks, etc.) or through third part application integration
+
+A-5 We do not want this platform to be developed as Learning Management System. We want it to be able to create the learning contents and evaluation material.
+However, users should be able to access the material for viewing and minimal user experience without going to the LMS. 
+
+16.
+OQ-1 How the LMS accesses the contents created by our platform. 
+We should provide a way to search the content repository for given topic, subtopic or search on certain keywords.
+
+----------------------------------
+Review of BRD_GENERIC.md
+----------------------------------
+
+Core Premise
+I assume all tracks may need the content generated in form of Video/Audio, Infographic, Presentation Decks, Guided walkthroughs, etc. 
+There may be some specific to specific domains however the above mentioned may be common to all. 
+
+As we are designing a generic platform it is good to have robust RBAC with flexibility to define domain specific roles and give required rights to those roles. 
+The FR-10 mentions this however subsequent sections talk of various profiles and we should have
+clarity with the generic tasks and specific named tasks. Also, we may think of using alias for the tasks if that helps addressing the RBAC with use of profiles (specific to domains)
+
+Entire document
+Wherever there is a scenario of artifact generation -> review -> revision it is implicit that the flow may iterate multiple times, you should factor this in every workflow. 
+Also, whatever artifact subjected for Audit has to go through the same process of generation -> audit -> revision
+This means we should have explicit states defined for the artifacts to know what exact state the artifact is and the possible transition definitions as well. 
+
+I will suggest creating generic asset class (or asset type) definitions such as :
+- Text
+- Audio
+- Video with Audio
+- BlogPost
+- Flier
+- Email Text
+- SMS, 
+- Paper : Technical, domain
+- Presentation Deck
+- Guided walkthrough (for example of any software application, assembly process, use of instrument/device, etc.)
+- Tutorial
+- Test, Assessment Item (such as MCQ test, scenario based test, etc.)
+And many other asset classes that we find.
+
+Also, I liked creating the specific Asset Types which are domain type (such as in the paragraph Asset Types (Marketing-specific)). 
+we should map these specific types to the generic ones if that helps. There may be one to many mapping in some cases if we do it.
+
+The asset creation process for these may have specific input requirements, specific steps, output requirements, storage requirements, etc. 
+So, by defining these classes, we can identify and address such details properly during the architecture/detailed design
+
+I like the idea of configurable distribution channel specific to domain. You should evaluate if similar concept is needed for the content creation 
+(such as configurable content creation channel)
+
+When we add a user to the platform, what do we specify? do we say this user belongs to so and so profile with this and this role?
+
+8.3 HR Induction Profile
+
+The User data requirement for the HR induction and other profiles may be a bit different. HR will need more detailed user information. I am not sure if we should even handle that aspect here. 
+Or we just limit ourself to create and serve the contents as needed. Handling the training needs of newly hired people as well as periodic training needs assessment of employees is a HR function. 
+I am not sure if we need to address that here. What do you say? 
+At the same, specifying the training needs for individual is necessary in the Training profile as well as HR Induction profile, so, we need to give it a thought. 
+
